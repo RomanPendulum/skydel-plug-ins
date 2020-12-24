@@ -4,6 +4,7 @@
 #include <QString>
 
 #include <vector>
+#include <type_traits>
 
 class SkydelPluginBase
 {
@@ -26,6 +27,7 @@ Q_DECLARE_INTERFACE(SkydelPluginBase, "SkydelPluginBase/1.0")
 #include "skydel_core_interface.h"
 #include "skydel_licensing_interface.h"
 #include "skydel_position_observer_interface.h"
+#include "skydel_raw_data_observer_interface.h"
 
 #define SKYDEL_PLUGIN_ROLE(interface) if constexpr (std::is_base_of_v<interface, T>) m_implementedInterfaces.push_back({ interface::ID, interface::VERSION, [](QObject* base) -> void* { return dynamic_cast<interface*>(base); }});
 
@@ -38,6 +40,7 @@ public:
     SKYDEL_PLUGIN_ROLE(SkydelCoreInterface);
     SKYDEL_PLUGIN_ROLE(SkydelPositionObserverInterface);
     SKYDEL_PLUGIN_ROLE(SkydelLicensingInterface);
+    SKYDEL_PLUGIN_ROLE(SkydelRawDataObserverInterface);
   }
 
   QObject* createInstance() override { return new T{}; }
