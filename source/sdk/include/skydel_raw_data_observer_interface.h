@@ -73,7 +73,7 @@ class SkydelRawDataObserverInterface
 public:
   virtual ~SkydelRawDataObserverInterface() = default;
 
-  virtual SkydelRuntimeRawDataObserver* createRuntimePositionObserver() = 0;
+  virtual SkydelRuntimeRawDataObserver* createRuntimeRawDataObserver() = 0;
 
   static constexpr auto ID = "SkydelRawDataObserver";
   static constexpr auto VERSION = 1;
