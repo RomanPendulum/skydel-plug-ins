@@ -3,9 +3,6 @@
 
 #include <QObject>
 
-#include <chrono>
-#include <array>
-
 class SkydelRuntimeRawDataObserver : public QObject
 {
 public:
@@ -50,17 +47,12 @@ public:
 
   struct TimedRawData
   {
-      using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
-
       TimedRawData():
-          gpsToUtcLs(0)
+          time(0)
       {}
 
-      TimePoint gpsTime;
-      int gpsToUtcLs; // GPS-UTC leap seconds
-
+      int64_t time;
       std::vector<SatelliteRawData> satellitesData;
-      std::array<double, 3> ecefPosition;
   };
 
   virtual void pushRawData(const TimedRawData &) = 0;
